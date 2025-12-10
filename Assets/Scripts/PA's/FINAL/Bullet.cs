@@ -10,12 +10,34 @@ public class Bullet : MonoBehaviour
     private bool _isShooting;
     private int _initialSpeed;
     public static event Action<int> OnDestroyDuck;
+    public static Action ResetScore;
     private int _ducksShooted;
+    
+    private AudioManager _audioManager;
+    private GameManager _gameManager;
+    private Gun _gun;
+    
+    [SerializeField] private PlusScoreUI scorePrefab;
 
+    private void Awake()
+    {
+        _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gun = gameObject.GetComponentInParent<Gun>();
+    } 
+    
     private void Start()
     {
         _positionToReturn = transform.position;
         ChangeScore();
+        
+        
+        // Esto garantiza que el score vuelve a 0 visualmente y en lógica
+        ResetScore += () =>
+        {
+            _ducksShooted = 0;
+            ChangeScore();
+        };
     }
     
     public void Update()
@@ -43,8 +65,7 @@ public class Bullet : MonoBehaviour
         transform.position = startPosition; // Recolocamos la bala físicamente en su posición de inicio antes de disparar
         
         // Si es la primera vez que se dispara, guardamos la velocidad original
-        if (_initialSpeed == 0)
-            _initialSpeed = bulletSpeed;
+        if (_initialSpeed == 0) _initialSpeed = bulletSpeed;
 
         // Restauramos velocidad y activamos disparo
         bulletSpeed = _initialSpeed;  
@@ -56,9 +77,38 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Duck"))
         {
-            Destroy(other.gameObject);
-            Debug.Log("Duck eliminado");;
+            // Instanciar el prefab en posición del pato
+            Vector3 spawnPos = other.transform.position;
+
+            PlusScoreUI ui = Instantiate(scorePrefab, spawnPos, Quaternion.identity);
+            
+            // Con el método PlayClipAtPoint Unity crea un componente temporal que nos permite ejecutar un sonido puntual
+            // sin necesidad de agregar un componente audioSource. Ideal para hits, explosiones, etc.
+            //AudioSource.PlayClipAtPoint(doveSound, other.transform.position, 1f);
+            _audioManager.SFXDove.PlayOneShot(_audioManager.SFXDove.clip, 1);
+            
+            // Ejecutar su animación
+            ui.StartAppear();
             AddScore(1);
+            other.gameObject.SetActive(false);
+            //Debug.Log("Duck eliminado");
+
+            if (_ducksShooted >= _gun.TotalDucks)
+            {
+                _gameManager.Victory();
+                _gun.ResetGun();
+            }
+        } 
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Table"))
+        {
+            _isShooting = false;
+            bulletSpeed = 0;
+            transform.position = _positionToReturn;
+            gameObject.SetActive(false);
         }
     }
 
