@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public partial class Bullet : MonoBehaviour
 {
     [HideInInspector] public int bulletSpeed;
     [HideInInspector] public float distanceToReturn;
