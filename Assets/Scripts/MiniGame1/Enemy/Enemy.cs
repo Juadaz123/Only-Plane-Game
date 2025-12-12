@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private Transform _targetPos;
-    private LifeSystem.LifeSystem _lifeSystem;
+    private LifeSystem _lifeSystem;
     private IObjectPool<Enemy> _pool;
     public static event Action<Transform> OnEnemyDeactivated;
 
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         
-        _lifeSystem = GetComponent<LifeSystem.LifeSystem>();
+        _lifeSystem = GetComponent<LifeSystem>();
     }
     
     public void SetPool(IObjectPool<Enemy> pool)

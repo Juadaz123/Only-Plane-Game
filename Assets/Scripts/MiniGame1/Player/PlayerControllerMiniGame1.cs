@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 namespace MiniGame1
 {
@@ -18,7 +20,7 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
     private Rigidbody2D _rb;
     private Coroutine _activeFireCoroutine;
     
-    private LifeSystem.LifeSystem _lifeSystem;
+    private LifeSystem _lifeSystem;
     private ObjectPooling.BulletPooling _bulletPooling;
     private SpriteRenderer _spriteRenderer;
     private GameManager.UIManager _uiManager;
@@ -32,9 +34,14 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _bulletPooling = FindFirstObjectByType<ObjectPooling.BulletPooling>();
         _rb = GetComponent<Rigidbody2D>();
-        _lifeSystem = GetComponent<LifeSystem.LifeSystem>();
+        _lifeSystem = GetComponent<MiniGame1.LifeSystem>();
     }
-
+    #if  UNITY_ANDROID
+    private void Start()
+    {
+        StartCoroutine(FireBulletsRoutine());
+    }
+    #endif
     private void Update()
     {
         if (_lifeSystem != null && _lifeSystem.currenthealth() <= 0)
@@ -71,7 +78,7 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
             }
         }
     }
-    
+    #if UNITY_EDITOR && UNITY_ANDROID
     public void OnTouchPosition(InputAction.CallbackContext context) 
     {
         Vector2 screenPosition = context.ReadValue<Vector2>(); 
@@ -83,6 +90,7 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
         
         transform.position = worldPosition;
     }
+    #endif
     private void FixedUpdate()
     {
         _rb.linearVelocity = _moveDirection * moveSpeed;
@@ -123,7 +131,7 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
         // Debug.Log("currentHealt" + _lifeSystem.currenthealth());
         _spriteRenderer.color = Color.red; 
         _lifeSystem.TakeDamage(1);
-        AudioManager.Instance.PlaySound("DamagePlayer");
+        MiniGame1.AudioManager.Instance.PlaySound("DamagePlayer");
         
         
         yield return new WaitForSeconds(0.3f);

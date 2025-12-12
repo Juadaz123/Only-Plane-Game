@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace MiniGame1.ObjectPooling
 {
-    public class EnemyPooling : GenericPool<Enemy.Enemy>
+    public class EnemyPooling : GenericPool<MiniGame1.Enemy.Enemy>
     {
         [Header("Spawn Settings")] [SerializeField]
         private float spawnInterval = 3f;
@@ -10,7 +10,7 @@ namespace MiniGame1.ObjectPooling
         [SerializeField] private Vector2 spawnAreaSize = new Vector2(8f, 2f);
         [SerializeField] private Color gizmoColor = Color.green;
 
-        protected override void OnTakeFromPool(Enemy.Enemy item)
+        protected override void OnTakeFromPool(MiniGame1.Enemy.Enemy item)
         {
             base.OnTakeFromPool(item);
             item.SetPool(Pool);

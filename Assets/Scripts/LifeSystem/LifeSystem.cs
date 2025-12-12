@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LifeSystem
+namespace MiniGame1
 {
     public class LifeSystem : MonoBehaviour
     {

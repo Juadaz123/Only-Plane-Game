@@ -4,14 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-<<<<<<< Updated upstream
   - Duck
   - Table
-=======
   - Enemy
   - Bullet
   - Music
->>>>>>> Stashed changes
+  - FinalScore
   layers:
   - Default
   - TransparentFX

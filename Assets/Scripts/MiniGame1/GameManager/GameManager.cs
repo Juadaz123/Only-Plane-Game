@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+#if UNITY_ANDROID 
+    Screen.orientation = ScreenOrientation.Portrait;        
+#endif
         _scoreManager = GetComponent<ScoreManager>();
         _exploPool = FindFirstObjectByType<ExploPooling>();
         _player = GameObject.FindGameObjectWithTag("Player");

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using LifeSystem_MG1;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyBehaviour1 : MonoBehaviour
@@ -12,7 +13,7 @@ public class EnemyBehaviour1 : MonoBehaviour
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
     private Transform _targetPos;
-    private LifeSystem.LifeSystem _lifeSystem;
+    private LifeSystem _lifeSystem;
 
 
     private void Awake()
@@ -20,7 +21,7 @@ public class EnemyBehaviour1 : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         
-        _lifeSystem = GetComponent<LifeSystem.LifeSystem>();
+        _lifeSystem = GetComponent<LifeSystem>();
     }
 
     private void OnEnable()

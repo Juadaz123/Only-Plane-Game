@@ -101,9 +101,9 @@ GameObject:
   - component: {fileID: 5107871754287931442}
   - component: {fileID: 2723387816587784315}
   - component: {fileID: 5190833098413265444}
-  - component: {fileID: 1231530759775858771}
   - component: {fileID: 327523550156416172}
   - component: {fileID: 6173316979995008859}
+  - component: {fileID: -8736693292360900478}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -194,25 +194,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5203242872514516718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c182a56294046a785877cb73df4b2e9, type: 3}
+  m_Script: {fileID: 11500000, guid: d07dd2fd7a2721349aa45baf74537e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeSystem.LifeSystem
   maxLife: 3
---- !u!114 &1231530759775858771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5203242872514516718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e4799e765e405cadae4abe9600e40b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyBehaviour1
-  typeOfEnemy: 1
-  enemySpeed: 6
-  waitedTime: 1.2
+  healthBar: {fileID: 0}
 --- !u!50 &327523550156416172
 Rigidbody2D:
   serializedVersion: 5
@@ -277,3 +263,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.1, y: 1.48}
   m_Direction: 0
+--- !u!114 &-8736693292360900478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5203242872514516718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0beb75b52061284db6f36c6de30464c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MiniGame1.Enemy.Enemy
+  typeOfEnemy: 1
+  enemySpeed: 5
+  waitedTime: 1.2
