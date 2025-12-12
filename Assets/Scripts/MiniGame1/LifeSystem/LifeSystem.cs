@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LifeSystem
+namespace LifeSystem_MG1
 {
     public class LifeSystem : MonoBehaviour
     {

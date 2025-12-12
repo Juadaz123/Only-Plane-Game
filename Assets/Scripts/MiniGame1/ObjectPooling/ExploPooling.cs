@@ -1,5 +1,5 @@
 using UnityEngine;
-using MiniGame1.Enemy;
+using Enemy.Enemy;
 
 namespace MiniGame1
 {

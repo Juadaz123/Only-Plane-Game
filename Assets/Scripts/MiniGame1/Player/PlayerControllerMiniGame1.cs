@@ -2,6 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+namespace MiniGame1
+{
+    
+
 [RequireComponent(typeof(PlayerInput), typeof(Rigidbody2D))]
 public class PlayerControllerMiniGame1 : MonoBehaviour
 {
@@ -15,18 +19,18 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
     private Coroutine _activeFireCoroutine;
     
     private LifeSystem.LifeSystem _lifeSystem;
-    private BulletPooling _bulletPooling;
+    private ObjectPooling.BulletPooling _bulletPooling;
     private SpriteRenderer _spriteRenderer;
-    private UIManager _uiManager;
+    private GameManager.UIManager _uiManager;
     private Camera _mainCamera; 
 
     //unity Events
     private void Awake()
     {
         _mainCamera = Camera.main;
-        _uiManager = GameObject.Find("GameManager").GetComponent<UIManager>();
+        _uiManager = GameObject.Find("GameManager").GetComponent<GameManager.UIManager>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _bulletPooling = FindFirstObjectByType<BulletPooling>();
+        _bulletPooling = FindFirstObjectByType<ObjectPooling.BulletPooling>();
         _rb = GetComponent<Rigidbody2D>();
         _lifeSystem = GetComponent<LifeSystem.LifeSystem>();
     }
@@ -91,7 +95,7 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
             if (_bulletPooling != null)
             {
                 _bulletPooling.SpawnBullet();
-                AudioManager.AudioManager.Instance.PlaySound("PlayerGun");
+                AudioManager.Instance.PlaySound("PlayerGun");
             }
             
             yield return new WaitForSeconds(fireRate);
@@ -119,11 +123,12 @@ public class PlayerControllerMiniGame1 : MonoBehaviour
         // Debug.Log("currentHealt" + _lifeSystem.currenthealth());
         _spriteRenderer.color = Color.red; 
         _lifeSystem.TakeDamage(1);
-        AudioManager.AudioManager.Instance.PlaySound("DamagePlayer");
+        AudioManager.Instance.PlaySound("DamagePlayer");
         
         
         yield return new WaitForSeconds(0.3f);
         
         _spriteRenderer.color = Color.white;
     }
+}
 }

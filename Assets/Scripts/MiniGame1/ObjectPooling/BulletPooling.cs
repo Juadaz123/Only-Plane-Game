@@ -1,20 +1,22 @@
-using System;
 using UnityEngine;
 
-public class BulletPooling : GenericPool<Proyectile>
+namespace MiniGame1.ObjectPooling
 {
-    [Header("Bullet Pooling Settings")]
-    [SerializeField] private Transform _SpawnBullet;
-
-    protected override void OnTakeFromPool(Proyectile item)
+    public class BulletPooling : GenericPool<Proyectile>
     {
-        base.OnTakeFromPool(item);
-        item.SetPool(Pool);
-    }
+        [Header("Bullet Pooling Settings")] [SerializeField]
+        private Transform spawnBullet;
 
-    public void SpawnBullet()
-    {
-        Proyectile bullet = Pool.Get();
-        bullet.transform.position = _SpawnBullet.position;
+        protected override void OnTakeFromPool(Proyectile item)
+        {
+            base.OnTakeFromPool(item);
+            item.SetPool(Pool);
+        }
+
+        public void SpawnBullet()
+        {
+            Proyectile bullet = Pool.Get();
+            bullet.transform.position = spawnBullet.position;
+        }
     }
 }

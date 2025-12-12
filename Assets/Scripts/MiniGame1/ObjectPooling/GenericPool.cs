@@ -1,58 +1,61 @@
-using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public abstract class GenericPool<T> : MonoBehaviour where T : Component
+namespace MiniGame1.ObjectPooling
 {
-    [Header("Configuración del Pool")]
-    [SerializeField] private T _prefab;
-    [SerializeField] private int _defaultCapacity = 10;
-    [SerializeField] private int _maxSize = 100;
-
-    private IObjectPool<T> _pool;
-
-    public IObjectPool<T> Pool
+    public abstract class GenericPool<T> : MonoBehaviour where T : Component
     {
-        get
+        [Header("Configuración del Pool")] [SerializeField]
+        private T prefab;
+
+        [SerializeField] private int defaultCapacity = 10;
+        [SerializeField] private int maxSize = 100;
+
+        private IObjectPool<T> _pool;
+
+        public IObjectPool<T> Pool
         {
-            if (_pool == null) InitializePool();
-            return _pool;
+            get
+            {
+                if (_pool == null) InitializePool();
+                return _pool;
+            }
         }
-    }
 
-    private void InitializePool()
-    {
-        // CORRECCIÓN 2: Instanciamos ObjectPool (la clase de Unity), no esta misma clase abstracta
-        _pool = new ObjectPool<T>(
-            createFunc: CreatePooledItem,
-            actionOnGet: OnTakeFromPool,
-            actionOnRelease: OnReturnedToPool,
-            actionOnDestroy: OnDestroyPoolObject,
-            collectionCheck: true,
-            defaultCapacity: _defaultCapacity,
-            maxSize: _maxSize
-        );
-    }
+        private void InitializePool()
+        {
+            // CORRECCIÓN 2: Instanciamos ObjectPool (la clase de Unity), no esta misma clase abstracta
+            _pool = new ObjectPool<T>(
+                createFunc: CreatePooledItem,
+                actionOnGet: OnTakeFromPool,
+                actionOnRelease: OnReturnedToPool,
+                actionOnDestroy: OnDestroyPoolObject,
+                collectionCheck: true,
+                defaultCapacity: defaultCapacity,
+                maxSize: maxSize
+            );
+        }
 
-    private T CreatePooledItem()
-    {
-        T instance = Instantiate(_prefab, transform);
-        return instance;
-    }
-    
+        private T CreatePooledItem()
+        {
+            T instance = Instantiate(prefab, transform);
+            return instance;
+        }
 
-    protected virtual void OnTakeFromPool(T item)
-    {
-        item.gameObject.SetActive(true);
-    }
 
-    protected virtual void OnReturnedToPool(T item)
-    {
-        item.gameObject.SetActive(false);
-    }
+        protected virtual void OnTakeFromPool(T item)
+        {
+            item.gameObject.SetActive(true);
+        }
 
-    protected virtual void OnDestroyPoolObject(T item)
-    {
-        Destroy(item.gameObject);
+        protected virtual void OnReturnedToPool(T item)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        protected virtual void OnDestroyPoolObject(T item)
+        {
+            Destroy(item.gameObject);
+        }
     }
 }

@@ -3,6 +3,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Pool;
 
+namespace MiniGame1.Enemy
+{
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
@@ -117,10 +120,12 @@ public class Enemy : MonoBehaviour
   
         _spriteRenderer.color = Color.red; 
         _lifeSystem.TakeDamage(1);
-        AudioManager.AudioManager.Instance.PlaySound("DamageEnemy");
+        MiniGame1.AudioManager.Instance.PlaySound("DamageEnemy");
         
         yield return new WaitForSeconds(0.3f);
         
         _spriteRenderer.color = Color.white;
     }
+}
+    
 }

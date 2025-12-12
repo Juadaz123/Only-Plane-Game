@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+namespace MiniGame1.GameManager
+{
+    
 
 public class UIManager : MonoBehaviour
 {
@@ -16,8 +19,9 @@ public class UIManager : MonoBehaviour
     {
         losePanel.SetActive(true);
         Time.timeScale = 0;
-        AudioManager.AudioManager.Instance.StopMusic();
+        AudioManager.Instance.StopMusic();
         finalScore.text = scoreManager.GetScore().ToString("D7");
     }
     
+}
 }

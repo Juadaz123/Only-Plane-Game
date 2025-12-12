@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace MiniGame1.Enemy
+namespace Enemy.Enemy
 {
     public class Explotion : MonoBehaviour
     {

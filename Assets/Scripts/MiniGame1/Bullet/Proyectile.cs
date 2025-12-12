@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
+namespace MiniGame1 {
 [RequireComponent(typeof(Rigidbody2D))]
 public class Proyectile : MonoBehaviour
 {
@@ -76,4 +77,5 @@ public class Proyectile : MonoBehaviour
             return; 
         }
     }
+}
 }

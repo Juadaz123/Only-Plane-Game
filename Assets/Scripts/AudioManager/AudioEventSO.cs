@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AudioManager
+namespace MiniGame1
 {
     [CreateAssetMenu(fileName = "new Audio", menuName = "Audio/Audio Event", order = 0)]
     public class AudioEventSO : ScriptableObject

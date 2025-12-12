@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using MiniGame1;
 using UnityEngine;
 
+namespace MiniGame1.GameManager
+{
+    
+
 public class GameManager : MonoBehaviour
 {
     
-    [SerializeField] private List<EnemyPooling> enemyPool;
+    [SerializeField] private List<ObjectPooling.EnemyPooling> enemyPool;
     
     private ExploPooling _exploPool;
     private GameObject _player;
@@ -45,13 +49,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         //surcibir evento
-        Enemy.OnEnemyDeactivated += SpawnReward;
+        Enemy.Enemy.OnEnemyDeactivated += SpawnReward;
     }
 
     private void OnDisable()
     {
         //Desuscribir evento
-        Enemy.OnEnemyDeactivated -= SpawnReward;
+        Enemy.Enemy.OnEnemyDeactivated -= SpawnReward;
     }
 
     private void SpawnReward(Transform enemyPos)
@@ -60,8 +64,9 @@ public class GameManager : MonoBehaviour
          // Debug.Log($"¡Enemigo eliminado en la posición: {enemyPos}!");
 
         _exploPool.SpawnExplotion(enemyPos);
-        AudioManager.AudioManager.Instance.PlaySound("Explotion");
+        AudioManager.Instance.PlaySound("Explotion");
 
         
     }
+}
 }

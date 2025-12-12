@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AudioManager
+namespace MiniGame1
 {
     
     public class AudioManager : MonoBehaviour
