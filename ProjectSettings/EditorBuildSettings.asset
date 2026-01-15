@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Final/Minijuegos Juan/MiniGame1.unity
+    path: Assets/Scenes/Final/OnlyPlaneGame/Plane_Level1.unity
     guid: acee7870482b922438d76e4ce0b818e6
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
